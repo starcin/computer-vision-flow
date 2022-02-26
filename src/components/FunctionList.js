@@ -1,8 +1,17 @@
-export default function FunctionList({ functions }) {
+export default function FunctionList({ functions, onItemSelected }) {
 	return (
 		<div className="function-list">
 			{functions.map((f) => {
-				return <button>{f.name}</button>
+				return (
+					<button
+						key={f.id}
+						onClick={() => {
+							onItemSelected(f)
+						}}
+					>
+						{f.name}
+					</button>
+				)
 			})}
 		</div>
 	)
