@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import FunctionList from "./components/FunctionList"
+import SettingsPanel from "./components/SettingsPanel"
+import Diagram from "./components/Diagram"
+import { useEffect, useState } from "react"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [functions, setFunctions] = useState([])
+
+	function getFunctions() {
+		fetch("databases/functions.json", {
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+		})
+			.then(function (response) {
+				return response.json()
+			})
+			.then(function (myJson) {
+				setFunctions(myJson.functions)
+			})
+	}
+
+	useEffect(() => {
+		getFunctions()
+	}, [])
+
+	return (
+		<div className="App">
+			<div className="editor-container">
+				<FunctionList functions={functions} />
+				<Diagram />
+				<SettingsPanel />
+			</div>
+		</div>
+	)
 }
 
-export default App;
+export default App

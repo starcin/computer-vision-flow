@@ -1,0 +1,34 @@
+{
+	"functions": [
+		{
+			"name": "Optical Character Recognition",
+			"id": "ocr",
+			"in": "img",
+			"out": "txt"
+		},
+		{
+			"name": "Resolution Change",
+			"id": "res-change",
+			"in": "img",
+			"out": "img"
+		},
+		{
+			"name": "Frame Extraction",
+			"id": "frame-ext",
+			"in": "vid",
+			"out": "img"
+		},
+		{
+			"name": "Text to Image",
+			"id": "txt2img",
+			"in": "txt",
+			"out": "img"
+		},
+		{
+			"name": "Font Change",
+			"id": "font-change",
+			"in": "txt",
+			"out": "txt"
+		}
+	]
+}
