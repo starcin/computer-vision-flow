@@ -1,0 +1,64 @@
+{
+	"modules": [
+		{
+			"name": "OCR Module - Slow",
+			"function": "ocr",
+			"tags": ["Slow"]
+		},
+		{
+			"name": "OCR Module - Fast",
+			"function": "ocr",
+			"tags": ["Fast"]
+		},
+		{
+			"name": "Image Resolution Module - Cubic",
+			"function": "res-change-img",
+			"tags": ["Cubic"]
+		},
+		{
+			"name": "Image Resolution Module - Linear",
+			"function": "res-change-img",
+			"tags": ["Linear"]
+		},
+		{
+			"name": "Video Resolution Module - Slow",
+			"function": "res-change-vid",
+			"tags": ["Slow"]
+		},
+		{
+			"name": "Video Resolution Module - Fast",
+			"function": "res-change-vid",
+			"tags": ["Fast"]
+		},
+		{
+			"name": "Frame Extractor Module - Loseless",
+			"function": "frame-ext",
+			"tags": ["Loseless"]
+		},
+		{
+			"name": "Frame Extractor Module - Simple",
+			"function": "frame-ext",
+			"tags": ["Simple"]
+		},
+		{
+			"name": "Text to Image Module - Slow",
+			"function": "txt2img",
+			"tags": ["Slow"]
+		},
+		{
+			"name": "Text to Image Module - Fast",
+			"function": "txt2img",
+			"tags": ["Fast"]
+		},
+		{
+			"name": "Font Module - Complex",
+			"function": "font-change",
+			"tags": ["Exotic", "Right to Left"]
+		},
+		{
+			"name": "Font Module - Simple",
+			"function": "font-change",
+			"tags": []
+		}
+	]
+}

@@ -2,6 +2,8 @@ import FunctionList from "./FunctionList"
 import SettingsPanel from "./SettingsPanel"
 import Diagram from "./Diagram"
 import { useEffect, useState } from "react"
+import { Flex } from "@chakra-ui/react"
+import SideBar from "./SideBar"
 
 const initialElements = [
 	{
@@ -31,10 +33,10 @@ const initialElements = [
 export default function Editor() {
 	const [functions, setFunctions] = useState([])
 	const [activeElement, setActiveElement] = useState(null)
-	const [elements, setElements] = useState(initialElements)
+	const [elements, setElements] = useState([])
 	const [lastUsedId, setLastUsedId] = useState(0)
 
-	function getFunctions() {
+	useEffect(() => {
 		fetch("databases/functions.json", {
 			headers: {
 				"Content-Type": "application/json",
@@ -47,10 +49,6 @@ export default function Editor() {
 			.then(function (myJson) {
 				setFunctions(myJson.functions)
 			})
-	}
-
-	useEffect(() => {
-		getFunctions()
 	}, [])
 
 	function addNode(funcObj) {
@@ -58,7 +56,13 @@ export default function Editor() {
 			id: (lastUsedId + 1).toString(),
 			type: "functionNode",
 			position: { x: 150, y: 150 },
-			data: { label: funcObj.name, funcType: funcObj.id },
+			data: {
+				label: funcObj.name,
+				funcType: funcObj.id,
+				in: funcObj.in,
+				out: funcObj.out,
+				module: null,
+			},
 		}
 		setLastUsedId((prev) => prev + 1)
 		setElements((es) => es.concat(newNode))
@@ -72,14 +76,34 @@ export default function Editor() {
 		setActiveElement(element)
 	}
 
+	function onModuleSelected(moduleName) {
+		setElements(
+			elements.map((element) => {
+				if (element.id === activeElement.id) {
+					element.data = { ...element.data, module: moduleName }
+				}
+				return element
+			})
+		)
+	}
+
 	return (
-		<div className="editor-container">
+		<Flex
+			className="editor-container"
+			direction="row"
+			// background="rebeccapurple"
+			// width="1200px"
+			margin="50px auto"
+			maxWidth="1400px"
+		>
 			<FunctionList functions={functions} onItemSelected={onFunctionClicked} />
 			<Diagram
 				elements={elements}
 				onFunctionNodeSelected={onFunctionNodeSelected}
+				setElements={setElements}
 			/>
-			<SettingsPanel element={activeElement} />
-		</div>
+
+			<SideBar element={activeElement} onModuleSelected={onModuleSelected} />
+		</Flex>
 	)
 }

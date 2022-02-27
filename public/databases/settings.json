@@ -1,0 +1,84 @@
+{
+	"settings": [
+		{
+			"id": "ocr",
+			"settings": [
+				{
+					"name": "Algorithm",
+					"type": "drop-down",
+					"options": ["Algorithm-A", "Algorithm-B"],
+					"defvalue": "Algorithm-B"
+				},
+				{
+					"name": "Denoise",
+					"type": "checkbox",
+					"defvalue": "false"
+				}
+			]
+		},
+		{
+			"id": "res-change",
+			"settings": [
+				{
+					"name": "Algorithm",
+					"type": "drop-down",
+					"options": ["Cubic", "Linear"],
+					"defvalue": "Linear"
+				},
+				{
+					"name": "Resolution",
+					"type": "text",
+					"defvalue": "200x300"
+				}
+			]
+		},
+		{
+			"id": "frame-ext",
+			"settings": [
+				{
+					"name": "Algorithm",
+					"type": "drop-down",
+					"options": ["Algorithm-A", "Algorithm-B"],
+					"defvalue": "Algorithm-A"
+				},
+				{
+					"name": "Denoise",
+					"type": "checkbox",
+					"defvalue": "true"
+				}
+			]
+		},
+		{
+			"id": "txt2img",
+			"settings": [
+				{
+					"name": "Algorithm",
+					"type": "drop-down",
+					"options": ["Algorithm-A", "Algorithm-B"],
+					"defvalue": "Algorithm-A"
+				},
+				{
+					"name": "Denoise",
+					"type": "checkbox",
+					"defvalue": "true"
+				}
+			]
+		},
+		{
+			"id": "font-change",
+			"settings": [
+				{
+					"name": "Algorithm",
+					"type": "drop-down",
+					"options": ["Algorithm-A", "Algorithm-B"],
+					"defvalue": "Algorithm-A"
+				},
+				{
+					"name": "Denoise",
+					"type": "checkbox",
+					"defvalue": "true"
+				}
+			]
+		}
+	]
+}

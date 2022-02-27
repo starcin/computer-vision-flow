@@ -1,9 +1,10 @@
 import Editor from "./components/Editor"
+import Header from "./components/Header"
 
 function App() {
 	return (
 		<div className="App">
-			{/* header here */}
+			<Header />
 			<Editor />
 		</div>
 	)
