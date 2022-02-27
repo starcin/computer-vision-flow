@@ -11,7 +11,7 @@ export default function ProblematicEdge({
 	style = { stroke: "#e53e3e", strokeWidth: "1px" },
 	data,
 	arrowHeadType = "arrow",
-	arrowStyle = { stroke: "#e53e3e", strokeWidth: "1px" },
+	// arrowStyle = { stroke: "#e53e3e", strokeWidth: "1px" },
 	markerEndId,
 }) {
 	const edgePath = getBezierPath({
@@ -32,7 +32,7 @@ export default function ProblematicEdge({
 				className="react-flow__edge-path"
 				d={edgePath}
 				markerEnd={markerEnd}
-				arrowStyle={arrowStyle}
+				// arrowStyle={arrowStyle}
 			/>
 		</>
 	)

@@ -35,10 +35,23 @@ export default function Diagram({
 		}
 	}
 
+	function onEdgeButtonClick(event, id) {
+		console.log("button clicked")
+	}
+
 	const onConnect = (params) => {
 		console.log(params)
 		if (params.sourceHandle === params.targetHandle) {
-			setElements((els) => addEdge({ ...params, type: "custom" }, els))
+			setElements((els) =>
+				addEdge(
+					{
+						...params,
+						type: "custom",
+						data: { onButtonClick: onEdgeButtonClick },
+					},
+					els
+				)
+			)
 		} else {
 			setElements((els) => addEdge({ ...params, type: "problematic" }, els))
 			// setElements((els) => addEdge({ ...params, animated: true }, els))
@@ -46,6 +59,12 @@ export default function Diagram({
 	}
 	const onElementsRemove = (elementsToRemove) =>
 		setElements((els) => removeElements(elementsToRemove, els))
+
+	function onEdgeButtonClick(event, id) {
+		setElements((els) =>
+			removeElements([els.find((element) => element.id === id)], els)
+		)
+	}
 
 	const onConnectStart = (param1, param2) => {
 		console.log("1", param1)

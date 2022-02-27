@@ -21,15 +21,10 @@ export default memo(({ data, selected, isConnectable }) => {
 				position="top"
 				id={data.in}
 				style={{
-					background: "transparent",
+					background: "#38B2AC",
 					height: "15px",
 					width: "15px",
-					top: "-10px",
-					borderRadius: "0px",
-					border: "solid black",
-					borderWidth: "0 5px 5px 0",
-					display: "inline-block",
-					transform: "translate(-50%, 0) rotate(45deg)",
+					top: "-9px",
 				}}
 				onConnect={(params) => console.log("handle onConnect", params)}
 				isConnectable={isConnectable}
@@ -49,15 +44,10 @@ export default memo(({ data, selected, isConnectable }) => {
 				position="bottom"
 				id={data.out}
 				style={{
-					background: "transparent",
+					background: "#285E61",
 					height: "15px",
 					width: "15px",
-					bottom: "-7px",
-					borderRadius: "0px",
-					border: "solid black",
-					borderWidth: "0 5px 5px 0",
-					display: "inline-block",
-					transform: "translate(-50%, 0) rotate(45deg)",
+					bottom: "-9px",
 				}}
 				isConnectable={isConnectable}
 			/>
