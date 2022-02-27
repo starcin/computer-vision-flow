@@ -61,15 +61,29 @@ export default function Editor() {
 			// console.log("selected")
 			setActiveElement({ data })
 		} else {
-			// console.log(elements)
+			if (
+				rfInstance
+					.toObject()
+					.elements.find(
+						(element) =>
+							"data" in element &&
+							"isSelected" in element.data &&
+							element.data.isSelected === true
+					) === undefined
+			) {
+				setActiveElement(null)
+			}
 		}
 	}
 
 	function getEmptySpace() {
 		const flowElements = rfInstance.toObject().elements
+		console.log(flowElements)
 		for (let y = 20; y < 1000; y = y + 100) {
 			if (
-				flowElements.find((element) => element.position.y === y) === undefined
+				flowElements.find(
+					(element) => "position" in element && element.position.y === y
+				) === undefined
 			) {
 				return y
 			}

@@ -39,7 +39,6 @@ export default function Diagram({
 	}
 
 	const onConnect = (params) => {
-		console.log(params)
 		if (params.sourceHandle === params.targetHandle) {
 			setElements((els) =>
 				addEdge(
@@ -52,7 +51,8 @@ export default function Diagram({
 				)
 			)
 		} else {
-			setElements((els) => addEdge({ ...params, type: "problematic" }, els))
+			console.log(params)
+			// setElements((els) => addEdge({ ...params, type: "problematic" }, els))
 			// setElements((els) => addEdge({ ...params, animated: true }, els))
 		}
 	}
@@ -66,9 +66,10 @@ export default function Diagram({
 	}
 
 	const onConnectStart = (param1, param2) => {
-		console.log("1", param1)
-		console.log("2", param2)
+		// console.log("1", param1)
+		// console.log("2", param2)
 	}
+
 	const onEdgeUpdate = (oldEdge, newConnection) => {
 		if (newConnection.sourceHandle === newConnection.targetHandle) {
 			setElements((els) =>
