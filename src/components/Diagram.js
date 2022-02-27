@@ -26,9 +26,8 @@ export default function Diagram({
 	elements,
 	onFunctionNodeSelected,
 	setElements,
+	setRfInstance,
 }) {
-	const [rfInstance, setRfInstance] = useState(null)
-
 	function onElementClick(event, element) {
 		if (element.type === "functionNode") {
 			onFunctionNodeSelected(element)

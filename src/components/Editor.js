@@ -35,6 +35,7 @@ export default function Editor() {
 	const [activeElement, setActiveElement] = useState(null)
 	const [elements, setElements] = useState([])
 	const [lastUsedId, setLastUsedId] = useState(0)
+	const [rfInstance, setRfInstance] = useState(null)
 
 	useEffect(() => {
 		fetch("databases/functions.json", {
@@ -57,10 +58,21 @@ export default function Editor() {
 
 	function onNodeSelectedChanged(isSelected, data) {
 		if (isSelected) {
-			console.log("selected")
+			// console.log("selected")
 			setActiveElement({ data })
 		} else {
-			console.log(elements)
+			// console.log(elements)
+		}
+	}
+
+	function getEmptySpace() {
+		const flowElements = rfInstance.toObject().elements
+		for (let y = 20; y < 1000; y = y + 100) {
+			if (
+				flowElements.find((element) => element.position.y === y) === undefined
+			) {
+				return y
+			}
 		}
 	}
 
@@ -68,7 +80,7 @@ export default function Editor() {
 		const newNode = {
 			id: (lastUsedId + 1).toString(),
 			type: "functionNode",
-			position: { x: 150, y: 150 },
+			position: { x: 20, y: getEmptySpace() },
 			data: {
 				label: funcObj.name,
 				funcType: funcObj.id,
@@ -112,6 +124,7 @@ export default function Editor() {
 				elements={elements}
 				// onFunctionNodeSelected={onFunctionNodeSelected}
 				setElements={setElements}
+				setRfInstance={setRfInstance}
 			/>
 
 			<SideBar element={activeElement} onModuleSelected={onModuleSelected} />
