@@ -7,18 +7,24 @@ export default ({
 	targetPosition,
 	connectionLineType,
 	connectionLineStyle,
-	isProblematic = false,
 }) => {
 	return (
 		<g>
 			<path
 				fill="none"
-				stroke={isProblematic ? "red" : "#999"}
+				// stroke="#999"
 				strokeWidth={1}
 				className="animated"
 				d={`M${sourceX},${sourceY} C ${sourceX} ${targetY} ${targetX} ${sourceY} ${targetX},${targetY}`}
 			/>
-			<circle cx={targetX} cy={targetY} fill="#999" r={3} />
+			<circle
+				cx={targetX}
+				cy={targetY}
+				fill="#fff"
+				r={3}
+				stroke="#222"
+				strokeWidth={1.5}
+			/>
 		</g>
 	)
 }

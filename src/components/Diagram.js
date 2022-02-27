@@ -27,6 +27,8 @@ export default function Diagram({
 	onFunctionNodeSelected,
 	setElements,
 }) {
+	const [rfInstance, setRfInstance] = useState(null)
+
 	function onElementClick(event, element) {
 		if (element.type === "functionNode") {
 			onFunctionNodeSelected(element)
@@ -39,6 +41,7 @@ export default function Diagram({
 			setElements((els) => addEdge({ ...params, type: "custom" }, els))
 		} else {
 			setElements((els) => addEdge({ ...params, type: "problematic" }, els))
+			// setElements((els) => addEdge({ ...params, animated: true }, els))
 		}
 	}
 	const onElementsRemove = (elementsToRemove) =>
@@ -60,27 +63,40 @@ export default function Diagram({
 		}
 	}
 
+	// function onDiagramClicked() {
+	// 	const selecteds = rfInstance
+	// 		.getElements()
+	// 		.filter((element) => element.data.isSelected === true)
+	// 	console.log(selecteds.length)
+	// }
+
 	return (
 		<Box
 			height="700px"
 			width="100%"
-			borderRadius="9px"
+			borderRadius="7px"
 			border="2px"
+			borderColor="silver"
 			overflow="hidden"
+			margin="0px 20px"
 		>
 			<ReactFlow
 				elements={elements}
 				nodeTypes={nodeTypes}
 				edgeTypes={edgeTypes}
-				onElementClick={onElementClick}
+				selectNodesOnDrag={false}
+				elementsSelectable={true}
+				// onElementClick={onElementClick}
 				onElementsRemove={onElementsRemove}
-				style={{ background: "white" }}
-				snapToGrid={true}
+				onLoad={setRfInstance}
 				onConnect={onConnect}
 				onConnectStart={onConnectStart}
 				onEdgeUpdate={onEdgeUpdate}
+				style={{ background: "white" }}
+				snapToGrid={true}
 				connectionLineComponent={ConnectionLine}
 				deleteKeyCode={46} /* 'delete'-key */
+				// onClick={onDiagramClicked}
 			>
 				<Controls />
 				<Background />

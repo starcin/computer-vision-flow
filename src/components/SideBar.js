@@ -1,5 +1,6 @@
 import { Box, Checkbox, Flex, Heading, Select } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
+import ModuleCard from "./ModuleCard"
 
 export default function SideBar({ element, onModuleSelected }) {
 	const [modules, setModules] = useState([])
@@ -42,7 +43,6 @@ export default function SideBar({ element, onModuleSelected }) {
 		})
 		setSuitableFilters(filters)
 		setFilteredModules(suitableModules)
-		console.log("filters", filters)
 	}, [suitableModules])
 
 	function onFilterChange(event) {
@@ -76,29 +76,23 @@ export default function SideBar({ element, onModuleSelected }) {
 		}
 	}, [activeFilters])
 
-	function onSelectionChange(event) {
-		setSelectedModule(event.target.value)
-		onModuleSelected(event.target.value)
+	function onSelectionChange(module) {
+		setSelectedModule(module)
+		onModuleSelected(module)
 	}
 
 	if (element == null) {
-		return <div>Modules Will Be Shown Here</div>
+		return <></>
 	}
 
 	return (
-		<Box
+		<Flex
+			direction="column"
+			gap="1rem"
 			minWidth="250px"
-			bg="teal"
-			// border="2px"
-			borderRadius="9px"
-			// borderColor="black"
-			padding="5px 9px"
 			fontFamily={`'JetBrains Mono', monospace;`}
-			color="white"
 		>
-			<Heading size="md" color="white" marginBottom="1rem">
-				{element.data.label}
-			</Heading>
+			<Heading size="md">{element.data.label}</Heading>
 			<Flex direction="column">
 				{suitableFilters.map((filter) => (
 					<Checkbox
@@ -111,7 +105,17 @@ export default function SideBar({ element, onModuleSelected }) {
 					</Checkbox>
 				))}
 			</Flex>
-			<Select
+			<Flex direction="column" gap="8px">
+				{filteredModules.map((module) => (
+					<ModuleCard
+						module={module}
+						onClick={onSelectionChange}
+						key={module.name}
+						value={module.name}
+					/>
+				))}
+			</Flex>
+			{/* <Select
 				borderColor="white"
 				borderWidth="2px"
 				focusBorderColor="teal"
@@ -129,7 +133,7 @@ export default function SideBar({ element, onModuleSelected }) {
 						{module.name}
 					</option>
 				))}
-			</Select>
-		</Box>
+			</Select> */}
+		</Flex>
 	)
 }

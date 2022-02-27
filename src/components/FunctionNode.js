@@ -1,12 +1,16 @@
 import { Box } from "@chakra-ui/react"
-import React, { memo } from "react"
-
+import React, { memo, useEffect } from "react"
 import { Handle } from "react-flow-renderer"
 
-export default memo(({ data, isConnectable }) => {
+export default memo(({ data, selected, isConnectable }) => {
+	useEffect(() => {
+		data.isSelected = selected
+		data.onSelectedChanged(selected, data)
+	}, [selected])
+
 	return (
 		<Box
-			bg="white"
+			bg={selected ? "#eee" : "white"}
 			border="1px"
 			borderRadius="9px"
 			padding="5px 9px"
@@ -17,10 +21,15 @@ export default memo(({ data, isConnectable }) => {
 				position="top"
 				id={data.in}
 				style={{
-					background: "#38B2AC",
+					background: "transparent",
 					height: "15px",
 					width: "15px",
-					top: "-9px",
+					top: "-10px",
+					borderRadius: "0px",
+					border: "solid black",
+					borderWidth: "0 5px 5px 0",
+					display: "inline-block",
+					transform: "translate(-50%, 0) rotate(45deg)",
 				}}
 				onConnect={(params) => console.log("handle onConnect", params)}
 				isConnectable={isConnectable}
@@ -30,7 +39,7 @@ export default memo(({ data, isConnectable }) => {
 			</div>
 			<label>
 				{data.module ? (
-					data.module
+					data.module.name
 				) : (
 					<span style={{ color: "red" }}>Select a module</span>
 				)}
@@ -40,10 +49,15 @@ export default memo(({ data, isConnectable }) => {
 				position="bottom"
 				id={data.out}
 				style={{
-					background: "#285E61",
+					background: "transparent",
 					height: "15px",
 					width: "15px",
-					bottom: "-9px",
+					bottom: "-7px",
+					borderRadius: "0px",
+					border: "solid black",
+					borderWidth: "0 5px 5px 0",
+					display: "inline-block",
+					transform: "translate(-50%, 0) rotate(45deg)",
 				}}
 				isConnectable={isConnectable}
 			/>

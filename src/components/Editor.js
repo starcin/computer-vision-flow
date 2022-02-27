@@ -51,6 +51,19 @@ export default function Editor() {
 			})
 	}, [])
 
+	function onFunctionNodeSelected(element) {
+		setActiveElement(element)
+	}
+
+	function onNodeSelectedChanged(isSelected, data) {
+		if (isSelected) {
+			console.log("selected")
+			setActiveElement({ data })
+		} else {
+			console.log(elements)
+		}
+	}
+
 	function addNode(funcObj) {
 		const newNode = {
 			id: (lastUsedId + 1).toString(),
@@ -62,6 +75,8 @@ export default function Editor() {
 				in: funcObj.in,
 				out: funcObj.out,
 				module: null,
+				isSelected: false,
+				onSelectedChanged: onNodeSelectedChanged,
 			},
 		}
 		setLastUsedId((prev) => prev + 1)
@@ -72,15 +87,11 @@ export default function Editor() {
 		addNode(funcObj)
 	}
 
-	function onFunctionNodeSelected(element) {
-		setActiveElement(element)
-	}
-
-	function onModuleSelected(moduleName) {
+	function onModuleSelected(module) {
 		setElements(
 			elements.map((element) => {
 				if (element.id === activeElement.id) {
-					element.data = { ...element.data, module: moduleName }
+					element.data = { ...element.data, module: module }
 				}
 				return element
 			})
@@ -99,7 +110,7 @@ export default function Editor() {
 			<FunctionList functions={functions} onItemSelected={onFunctionClicked} />
 			<Diagram
 				elements={elements}
-				onFunctionNodeSelected={onFunctionNodeSelected}
+				// onFunctionNodeSelected={onFunctionNodeSelected}
 				setElements={setElements}
 			/>
 

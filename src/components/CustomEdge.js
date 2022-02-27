@@ -8,9 +8,10 @@ export default function CustomEdge({
 	targetY,
 	sourcePosition,
 	targetPosition,
-	style = { stroke: "#319795", strokeWidth: "8px" },
+	// style = { stroke: "#319795", strokeWidth: "1px" },
+	style,
 	data,
-	arrowHeadType,
+	arrowHeadType = "arrow",
 	markerEndId,
 }) {
 	const edgePath = getBezierPath({

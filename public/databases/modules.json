@@ -3,62 +3,74 @@
 		{
 			"name": "OCR Module - Slow",
 			"function": "ocr",
-			"tags": ["Slow"]
+			"tags": ["Slow"],
+			"supplier": "Doogle"
 		},
 		{
 			"name": "OCR Module - Fast",
 			"function": "ocr",
-			"tags": ["Fast"]
+			"tags": ["Fast"],
+			"supplier": "Maple"
 		},
 		{
 			"name": "Image Resolution Module - Cubic",
 			"function": "res-change-img",
-			"tags": ["Cubic"]
+			"tags": ["Cubic"],
+			"supplier": "Doogle"
 		},
 		{
 			"name": "Image Resolution Module - Linear",
 			"function": "res-change-img",
-			"tags": ["Linear"]
+			"tags": ["Linear"],
+			"supplier": "Doogle"
 		},
 		{
 			"name": "Video Resolution Module - Slow",
 			"function": "res-change-vid",
-			"tags": ["Slow"]
+			"tags": ["Slow"],
+			"supplier": "OpenCV"
 		},
 		{
 			"name": "Video Resolution Module - Fast",
 			"function": "res-change-vid",
-			"tags": ["Fast"]
+			"tags": ["Fast"],
+			"supplier": "Gstream"
 		},
 		{
 			"name": "Frame Extractor Module - Loseless",
 			"function": "frame-ext",
-			"tags": ["Loseless"]
+			"tags": ["Loseless"],
+			"supplier": "NullSoft"
 		},
 		{
 			"name": "Frame Extractor Module - Simple",
 			"function": "frame-ext",
-			"tags": ["Simple"]
+			"tags": ["Simple"],
+			"supplier": "Doogle"
 		},
 		{
 			"name": "Text to Image Module - Slow",
 			"function": "txt2img",
-			"tags": ["Slow"]
+			"tags": ["Slow"],
+			"supplier": "OpenAI"
 		},
 		{
 			"name": "Text to Image Module - Fast",
 			"function": "txt2img",
-			"tags": ["Fast"]
+			"tags": ["Fast"],
+			"supplier": "Doogle"
 		},
 		{
 			"name": "Font Module - Complex",
 			"function": "font-change",
-			"tags": ["Exotic", "Right to Left"]
+			"tags": ["Exotic", "Right to Left"],
+			"supplier": "G-Fonts"
 		},
 		{
 			"name": "Font Module - Simple",
 			"function": "font-change",
-			"tags": []
+			"tags": [],
+			"supplier": "LeFonts"
 		}
 	]
 }
