@@ -56,10 +56,10 @@ export default function Editor() {
 		setActiveElement(element)
 	}
 
-	function onNodeSelectedChanged(isSelected, data) {
+	function onNodeSelectedChanged(isSelected, id, data) {
 		if (isSelected) {
 			// console.log("selected")
-			setActiveElement({ data })
+			setActiveElement({ id, data })
 		} else {
 			if (
 				rfInstance
@@ -114,6 +114,7 @@ export default function Editor() {
 	}
 
 	function onModuleSelected(module) {
+		console.log(module)
 		setElements(
 			elements.map((element) => {
 				if (element.id === activeElement.id) {

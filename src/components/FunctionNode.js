@@ -2,10 +2,10 @@ import { Box } from "@chakra-ui/react"
 import React, { memo, useEffect } from "react"
 import { Handle } from "react-flow-renderer"
 
-export default memo(({ data, selected, isConnectable }) => {
+export default memo(({ data, selected, isConnectable, id }) => {
 	useEffect(() => {
 		data.isSelected = selected
-		data.onSelectedChanged(selected, data)
+		data.onSelectedChanged(selected, id, data)
 	}, [selected])
 
 	return (

@@ -3,38 +3,38 @@
 		{
 			"name": "Resolution Change - Image",
 			"id": "res-change-img",
-			"in": "img",
-			"out": "img"
+			"in": "Image",
+			"out": "Image"
 		},
 		{
 			"name": "Resolution Change - Video",
 			"id": "res-change-vid",
-			"in": "vid",
-			"out": "vid"
+			"in": "Video",
+			"out": "Video"
 		},
 		{
 			"name": "Frame Extraction",
 			"id": "frame-ext",
-			"in": "vid",
-			"out": "img"
+			"in": "Video",
+			"out": "Image"
 		},
 		{
 			"name": "Text to Image",
 			"id": "txt2img",
-			"in": "txt",
-			"out": "img"
+			"in": "Text",
+			"out": "Image"
 		},
 		{
 			"name": "Font Change",
 			"id": "font-change",
-			"in": "txt",
-			"out": "txt"
+			"in": "Text",
+			"out": "Text"
 		},
 		{
 			"name": "OCR",
 			"id": "ocr",
-			"in": "img",
-			"out": "txt"
+			"in": "Image",
+			"out": "Text"
 		}
 	]
 }

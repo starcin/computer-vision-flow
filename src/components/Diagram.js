@@ -7,7 +7,14 @@ import ReactFlow, {
 } from "react-flow-renderer"
 import FunctionNode from "./FunctionNode"
 import { useEffect, useState } from "react"
-import { Box } from "@chakra-ui/react"
+import {
+	AlertDialog,
+	AlertDialogBody,
+	AlertDialogContent,
+	AlertDialogHeader,
+	AlertDialogOverlay,
+	Box,
+} from "@chakra-ui/react"
 import CustomEdge from "./CustomEdge"
 import ProblematicEdge from "./ProblematicEdge"
 import ConnectionLine from "./ConnectionLine"
@@ -28,6 +35,18 @@ export default function Diagram({
 	setElements,
 	setRfInstance,
 }) {
+	const [alertState, setAlertState] = useState({
+		isOpen: false,
+		sourceType: null,
+		targetType: null,
+	})
+	const onAlertClose = () =>
+		setAlertState({
+			isOpen: false,
+			sourceType: null,
+			targetType: null,
+		})
+
 	function onElementClick(event, element) {
 		if (element.type === "functionNode") {
 			onFunctionNodeSelected(element)
@@ -52,6 +71,11 @@ export default function Diagram({
 			)
 		} else {
 			console.log(params)
+			setAlertState({
+				isOpen: true,
+				sourceType: params.sourceHandle,
+				targetType: params.targetHandle,
+			})
 			// setElements((els) => addEdge({ ...params, type: "problematic" }, els))
 			// setElements((els) => addEdge({ ...params, animated: true }, els))
 		}
@@ -120,6 +144,25 @@ export default function Diagram({
 				<Controls />
 				<Background />
 			</ReactFlow>
+			<AlertDialog
+				isOpen={alertState.isOpen}
+				// leastDestructiveRef={cancelRef}
+				onClose={onAlertClose}
+			>
+				<AlertDialogOverlay>
+					<AlertDialogContent>
+						<AlertDialogHeader fontSize="lg" fontWeight="bold">
+							Data types are incompatible
+						</AlertDialogHeader>
+
+						<AlertDialogBody>
+							{/* {`The source is ${alertState.sourceType} but the target expects ${alertState.targetType}`} */}
+							The source is <strong>{alertState.sourceType}</strong> but the
+							target expects <strong>{alertState.targetType}</strong>
+						</AlertDialogBody>
+					</AlertDialogContent>
+				</AlertDialogOverlay>
+			</AlertDialog>
 		</Box>
 	)
 }

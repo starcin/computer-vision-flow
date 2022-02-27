@@ -66,7 +66,7 @@ export default function SideBar({ element, onModuleSelected }) {
 					let retval = true
 					activeFilters.forEach((filter) => {
 						if (module.tags.indexOf(filter) === -1) {
-							console.log("filtered out")
+							// console.log("filtered out")
 							retval = false
 						}
 					})
@@ -97,7 +97,7 @@ export default function SideBar({ element, onModuleSelected }) {
 				{suitableFilters.map((filter) => (
 					<Checkbox
 						colorScheme="teal"
-						key={element.data.label + filter}
+						key={element.id + filter}
 						id={filter}
 						onChange={onFilterChange}
 					>
