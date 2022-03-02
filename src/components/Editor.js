@@ -59,7 +59,6 @@ export default function Editor() {
 
 	function onNodeSelectedChanged(isSelected, id, data) {
 		if (isSelected) {
-			// console.log("selected")
 			setActiveElement({ id, data })
 		} else {
 			if (
@@ -97,23 +96,61 @@ export default function Editor() {
 	}
 
 	function addNode(funcObj) {
-		const newNode = {
-			id: (lastUsedId + 1).toString(),
-			type: "functionNode",
-			position: { x: 20, y: getEmptySpace() },
-			data: {
-				label: funcObj.name,
-				funcType: funcObj.id,
-				in: funcObj.in,
-				out: funcObj.out,
-				module: null,
-				isSelected: false,
-				onSelectedChanged: onNodeSelectedChanged,
-				onDeleteClicked: onDeleteClicked,
-			},
+		if (funcObj.id === "input") {
+			const newNode = {
+				id: (lastUsedId + 1).toString(),
+				type: "inputNode",
+				position: { x: 20, y: getEmptySpace() },
+				data: {
+					label: "Input",
+					funcType: funcObj.id,
+					// in: funcObj.in,
+					// out: funcObj.out,
+					module: null,
+					isSelected: false,
+					onSelectedChanged: onNodeSelectedChanged,
+					onDeleteClicked: onDeleteClicked,
+				},
+			}
+			setLastUsedId((prev) => prev + 1)
+			setElements((es) => es.concat(newNode))
+		} else if (funcObj.id === "output") {
+			const newNode = {
+				id: (lastUsedId + 1).toString(),
+				type: "outputNode",
+				position: { x: 20, y: getEmptySpace() },
+				data: {
+					label: "Output",
+					funcType: funcObj.id,
+					// in: funcObj.in,
+					// out: funcObj.out,
+					module: null,
+					isSelected: false,
+					onSelectedChanged: onNodeSelectedChanged,
+					onDeleteClicked: onDeleteClicked,
+				},
+			}
+			setLastUsedId((prev) => prev + 1)
+			setElements((es) => es.concat(newNode))
+		} else {
+			const newNode = {
+				id: (lastUsedId + 1).toString(),
+				type: "functionNode",
+				position: { x: 20, y: getEmptySpace() },
+				data: {
+					label: funcObj.name,
+					funcType: funcObj.id,
+					in: funcObj.in,
+					out: funcObj.out,
+					module: null,
+					isSelected: false,
+					onSelectedChanged: onNodeSelectedChanged,
+					onDeleteClicked: onDeleteClicked,
+				},
+			}
+			setLastUsedId((prev) => prev + 1)
+			setElements((es) => es.concat(newNode))
 		}
-		setLastUsedId((prev) => prev + 1)
-		setElements((es) => es.concat(newNode))
 	}
 
 	function onFunctionClicked(funcObj) {

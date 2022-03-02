@@ -6,7 +6,6 @@ import ReactFlow, {
 	updateEdge,
 	getIncomers,
 } from "react-flow-renderer"
-import FunctionNode from "./FunctionNode"
 import { useEffect, useState } from "react"
 import {
 	AlertDialog,
@@ -19,9 +18,14 @@ import {
 import CustomEdge from "./CustomEdge"
 import ProblematicEdge from "./ProblematicEdge"
 import ConnectionLine from "./ConnectionLine"
+import FunctionNode from "./FunctionNode"
+import InputNode from "./InputNode"
+import OutputNode from "./OutputNode"
 
 const nodeTypes = {
 	functionNode: FunctionNode,
+	inputNode: InputNode,
+	outputNode: OutputNode,
 }
 const edgeTypes = {
 	custom: CustomEdge,
@@ -65,7 +69,7 @@ export default function Diagram({
 
 	// Triggered when connection completed. Chooses the correct edge type depending on the handle compatibility.
 	const onConnect = (params) => {
-		console.log()
+		// Check if the target is already has a connection
 		if (
 			getIncomers(
 				rfInstance
@@ -74,7 +78,12 @@ export default function Diagram({
 				elements
 			).length === 0
 		) {
-			if (params.sourceHandle === params.targetHandle) {
+			// Check if types match
+			if (
+				params.sourceHandle === params.targetHandle ||
+				params.sourceHandle === "any" ||
+				params.targetHandle === "any"
+			) {
 				setElements((els) =>
 					addEdge(
 						{
