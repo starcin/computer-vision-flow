@@ -15,7 +15,26 @@ export default memo(({ data, selected, isConnectable, id }) => {
 			borderRadius="9px"
 			padding="5px 9px"
 			fontFamily={`'JetBrains Mono', monospace;`}
+			style={{ position: "relative" }}
 		>
+			<button
+				className="nodrag" // This class name is needed so the "selected" event does not fire
+				onClick={(event) => data.onDeleteClicked(event, id)}
+				style={{
+					background: "#fff",
+					border: " solid 1px",
+					borderRadius: "100%",
+					display: "inline-block",
+					aspectRatio: "1",
+					width: "20px",
+					lineHeight: "5px",
+					position: "absolute",
+					top: "-10px",
+					right: "-10px",
+				}}
+			>
+				×
+			</button>
 			<Handle
 				type="target"
 				position="top"

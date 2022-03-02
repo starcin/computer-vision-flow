@@ -4,6 +4,7 @@ import Diagram from "./Diagram"
 import { useEffect, useState } from "react"
 import { Flex } from "@chakra-ui/react"
 import SideBar from "./SideBar"
+import { removeElements } from "react-flow-renderer"
 
 const initialElements = [
 	{
@@ -76,6 +77,12 @@ export default function Editor() {
 		}
 	}
 
+	function onDeleteClicked(event, id) {
+		setElements((els) =>
+			removeElements([els.find((element) => element.id === id)], els)
+		)
+	}
+
 	function getEmptySpace() {
 		const flowElements = rfInstance.toObject().elements
 		console.log(flowElements)
@@ -103,6 +110,7 @@ export default function Editor() {
 				module: null,
 				isSelected: false,
 				onSelectedChanged: onNodeSelectedChanged,
+				onDeleteClicked: onDeleteClicked,
 			},
 		}
 		setLastUsedId((prev) => prev + 1)
