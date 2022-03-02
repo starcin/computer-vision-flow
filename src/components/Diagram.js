@@ -40,6 +40,8 @@ export default function Diagram({
 		sourceType: null,
 		targetType: null,
 	})
+
+	// Triggered when the alert is closed. Resets the state. (Not entirely necessary)
 	const onAlertClose = () =>
 		setAlertState({
 			isOpen: false,
@@ -47,16 +49,14 @@ export default function Diagram({
 			targetType: null,
 		})
 
+	//Triggered when en element is clicked (not active at the moment)
 	function onElementClick(event, element) {
 		if (element.type === "functionNode") {
 			onFunctionNodeSelected(element)
 		}
 	}
 
-	function onEdgeButtonClick(event, id) {
-		console.log("button clicked")
-	}
-
+	// Triggered when connection completed. Chooses the correct edge type depending on the handle compatibility.
 	const onConnect = (params) => {
 		if (params.sourceHandle === params.targetHandle) {
 			setElements((els) =>
@@ -80,20 +80,14 @@ export default function Diagram({
 			// setElements((els) => addEdge({ ...params, animated: true }, els))
 		}
 	}
-	const onElementsRemove = (elementsToRemove) =>
-		setElements((els) => removeElements(elementsToRemove, els))
 
-	function onEdgeButtonClick(event, id) {
-		setElements((els) =>
-			removeElements([els.find((element) => element.id === id)], els)
-		)
-	}
-
+	// Triggered when the connection is created but still floating
 	const onConnectStart = (param1, param2) => {
 		// console.log("1", param1)
 		// console.log("2", param2)
 	}
 
+	// Triggered when the connection of the edge is moved to another node
 	const onEdgeUpdate = (oldEdge, newConnection) => {
 		if (newConnection.sourceHandle === newConnection.targetHandle) {
 			setElements((els) =>
@@ -105,6 +99,17 @@ export default function Diagram({
 			)
 		}
 	}
+
+	// Deletes edge. Triggered when the x on edge is clicked
+	function onEdgeButtonClick(event, id) {
+		setElements((els) =>
+			removeElements([els.find((element) => element.id === id)], els)
+		)
+	}
+
+	// Deletes element. Triggered when the deleteKeyCode is pressed
+	const onElementsRemove = (elementsToRemove) =>
+		setElements((els) => removeElements(elementsToRemove, els))
 
 	// function onDiagramClicked() {
 	// 	const selecteds = rfInstance
