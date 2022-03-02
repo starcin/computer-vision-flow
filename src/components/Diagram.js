@@ -4,6 +4,7 @@ import ReactFlow, {
 	addEdge,
 	removeElements,
 	updateEdge,
+	getIncomers,
 } from "react-flow-renderer"
 import FunctionNode from "./FunctionNode"
 import { useEffect, useState } from "react"
@@ -33,13 +34,19 @@ export default function Diagram({
 	elements,
 	onFunctionNodeSelected,
 	setElements,
-	setRfInstance,
+	setParentRfInstance,
 }) {
 	const [alertState, setAlertState] = useState({
 		isOpen: false,
 		sourceType: null,
 		targetType: null,
 	})
+	const [rfInstance, setRfInstance] = useState(null)
+
+	function setReactFlowInstances(instance) {
+		setParentRfInstance(instance)
+		setRfInstance(instance)
+	}
 
 	// Triggered when the alert is closed. Resets the state. (Not entirely necessary)
 	const onAlertClose = () =>
@@ -58,26 +65,35 @@ export default function Diagram({
 
 	// Triggered when connection completed. Chooses the correct edge type depending on the handle compatibility.
 	const onConnect = (params) => {
-		if (params.sourceHandle === params.targetHandle) {
-			setElements((els) =>
-				addEdge(
-					{
-						...params,
-						type: "custom",
-						data: { onButtonClick: onEdgeButtonClick },
-					},
-					els
+		console.log()
+		if (
+			getIncomers(
+				rfInstance
+					.toObject()
+					.elements.find((element) => element.id === params.target),
+				elements
+			).length === 0
+		) {
+			if (params.sourceHandle === params.targetHandle) {
+				setElements((els) =>
+					addEdge(
+						{
+							...params,
+							type: "custom",
+							data: { onButtonClick: onEdgeButtonClick },
+						},
+						els
+					)
 				)
-			)
-		} else {
-			console.log(params)
-			setAlertState({
-				isOpen: true,
-				sourceType: params.sourceHandle,
-				targetType: params.targetHandle,
-			})
-			// setElements((els) => addEdge({ ...params, type: "problematic" }, els))
-			// setElements((els) => addEdge({ ...params, animated: true }, els))
+			} else {
+				setAlertState({
+					isOpen: true,
+					sourceType: params.sourceHandle,
+					targetType: params.targetHandle,
+				})
+				// setElements((els) => addEdge({ ...params, type: "problematic" }, els))
+				// setElements((els) => addEdge({ ...params, animated: true }, els))
+			}
 		}
 	}
 
@@ -136,7 +152,7 @@ export default function Diagram({
 				elementsSelectable={true}
 				// onElementClick={onElementClick}
 				onElementsRemove={onElementsRemove}
-				onLoad={setRfInstance}
+				onLoad={setReactFlowInstances}
 				onConnect={onConnect}
 				onConnectStart={onConnectStart}
 				onEdgeUpdate={onEdgeUpdate}

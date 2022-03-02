@@ -85,7 +85,6 @@ export default function Editor() {
 
 	function getEmptySpace() {
 		const flowElements = rfInstance.toObject().elements
-		console.log(flowElements)
 		for (let y = 20; y < 1000; y = y + 100) {
 			if (
 				flowElements.find(
@@ -147,7 +146,7 @@ export default function Editor() {
 				elements={elements}
 				// onFunctionNodeSelected={onFunctionNodeSelected}
 				setElements={setElements}
-				setRfInstance={setRfInstance}
+				setParentRfInstance={setRfInstance}
 			/>
 
 			<SideBar element={activeElement} onModuleSelected={onModuleSelected} />
