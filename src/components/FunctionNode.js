@@ -15,7 +15,7 @@ export default memo(({ data, selected, isConnectable, id }) => {
 			borderRadius="9px"
 			padding="5px 9px"
 			fontFamily={`'JetBrains Mono', monospace;`}
-			style={{ position: "relative" }}
+			style={{ position: "relative", left: "-50%" }}
 		>
 			<button
 				className="nodrag" // This class name is needed so the "selected" event does not fire

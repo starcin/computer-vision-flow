@@ -31,6 +31,8 @@ const initialElements = [
 	{ id: "e2-3", source: "B", target: "C" },
 ]
 
+const defaultNodeOffsetX = 160
+
 export default function Editor() {
 	const [functions, setFunctions] = useState([])
 	const [activeElement, setActiveElement] = useState(null)
@@ -100,7 +102,7 @@ export default function Editor() {
 			const newNode = {
 				id: (lastUsedId + 1).toString(),
 				type: "inputNode",
-				position: { x: 20, y: getEmptySpace() },
+				position: { x: defaultNodeOffsetX, y: getEmptySpace() },
 				data: {
 					label: "Input",
 					funcType: funcObj.id,
@@ -118,7 +120,7 @@ export default function Editor() {
 			const newNode = {
 				id: (lastUsedId + 1).toString(),
 				type: "outputNode",
-				position: { x: 20, y: getEmptySpace() },
+				position: { x: defaultNodeOffsetX, y: getEmptySpace() },
 				data: {
 					label: "Output",
 					funcType: funcObj.id,
@@ -136,7 +138,7 @@ export default function Editor() {
 			const newNode = {
 				id: (lastUsedId + 1).toString(),
 				type: "functionNode",
-				position: { x: 20, y: getEmptySpace() },
+				position: { x: defaultNodeOffsetX, y: getEmptySpace() },
 				data: {
 					label: funcObj.name,
 					funcType: funcObj.id,
