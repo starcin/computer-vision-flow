@@ -57,6 +57,7 @@ export default function Editor() {
 	const [lastUsedId, setLastUsedId] = useState(0)
 	const [rfInstance, setRfInstance] = useState(null)
 	const [undoElementsStates, setUndoElementsStates] = useState([])
+	const [redoElementsStates, setRedoElementsStates] = useState([])
 	const [alertState, setAlertState] = useState({
 		isOpen: false,
 		sourceType: null,
@@ -167,6 +168,7 @@ export default function Editor() {
 				? previousState.concat([rfInstance.toObject().elements])
 				: previousState.slice(1).concat([rfInstance.toObject().elements])
 		)
+		setRedoElementsStates([])
 	}
 
 	// Gets triggered when a node's internal "selected" property is changed
@@ -285,6 +287,9 @@ export default function Editor() {
 
 	function onUndoClicked() {
 		if (undoElementsStates[undoElementsStates.length - 1]) {
+			setRedoElementsStates((previousState) =>
+				previousState.concat([rfInstance.toObject().elements])
+			)
 			setElements(undoElementsStates[undoElementsStates.length - 1])
 			setUndoElementsStates((previousState) => previousState.slice(0, -1))
 		} else {
@@ -292,7 +297,17 @@ export default function Editor() {
 		}
 	}
 
-	function onRedoClicked() {}
+	function onRedoClicked() {
+		if (redoElementsStates[redoElementsStates.length - 1]) {
+			setUndoElementsStates((previousState) =>
+				previousState.concat([rfInstance.toObject().elements])
+			)
+			setElements(redoElementsStates[redoElementsStates.length - 1])
+			setRedoElementsStates((previousState) => previousState.slice(0, -1))
+		} else {
+			console.log("no redo")
+		}
+	}
 
 	return (
 		<Flex
