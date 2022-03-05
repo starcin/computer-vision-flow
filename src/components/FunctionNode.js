@@ -10,6 +10,11 @@ export default memo(({ data, selected, isConnectable, id }) => {
 
 	return (
 		<Box
+			className={
+				selected
+					? "aix-node-function aix-node-function-selected"
+					: "aix-node-function"
+			}
 			bg={selected ? "#eee" : "white"}
 			border="1px"
 			borderRadius="9px"
@@ -18,7 +23,7 @@ export default memo(({ data, selected, isConnectable, id }) => {
 			style={{ position: "relative", left: "-50%" }}
 		>
 			<button
-				className="nodrag" // This class name is needed so the "selected" event does not fire
+				className="aix-node-button-close nodrag" // "nodrag" class name is needed so the "selected" event does not fire
 				onClick={(event) => data.onDeleteClicked(event, id)}
 				style={{
 					background: "#fff",
@@ -36,6 +41,7 @@ export default memo(({ data, selected, isConnectable, id }) => {
 				×
 			</button>
 			<Handle
+				className="aix-handle"
 				type="target"
 				position="top"
 				id={data.in}
@@ -59,6 +65,7 @@ export default memo(({ data, selected, isConnectable, id }) => {
 				)}
 			</label>
 			<Handle
+				className="aix-handle"
 				type="source"
 				position="bottom"
 				id={data.out}
