@@ -309,6 +309,11 @@ export default function Editor() {
 		}
 	}
 
+	function onImportClicked() {}
+	function onExportClicked() {
+		console.log(rfInstance.toObject())
+	}
+
 	return (
 		<Flex
 			className="editor-container"
@@ -327,13 +332,23 @@ export default function Editor() {
 				borderColor="silver"
 				overflow="hidden"
 			>
-				<HStack w="100%" justify="start" p="2px 4px">
-					<Button onClick={onUndoClicked} size="xs">
-						Undo
-					</Button>
-					<Button onClick={onRedoClicked} size="xs">
-						Redo
-					</Button>
+				<HStack w="100%" justify="space-between">
+					<HStack p="2px 4px">
+						<Button onClick={onUndoClicked} size="xs">
+							Undo
+						</Button>
+						<Button onClick={onRedoClicked} size="xs">
+							Redo
+						</Button>
+					</HStack>
+					<HStack p="2px 4px">
+						<Button onClick={onImportClicked} size="xs">
+							Import
+						</Button>
+						<Button onClick={onExportClicked} size="xs">
+							Export
+						</Button>
+					</HStack>
 				</HStack>
 
 				<Diagram
